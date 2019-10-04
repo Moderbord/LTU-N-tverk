@@ -110,18 +110,19 @@ namespace spark
 	class Msg
 	{
 	public:
-		static const int seqNm = 1;
 
-		static void Join(const char name[], int id, ObjectDesc desc, ObjectForm form, char* buf)
+		static void Join(const std::string sName, unsigned int id, ObjectDesc desc, ObjectForm form, char* buf, unsigned int& seqNm)
 		{
 			MsgHead head = { sizeof(JoinMsg), seqNm, id, spark::MsgType::JOIN };
-			JoinMsg join = { head, desc, form, *(&name) };
-			
+			JoinMsg join = { head, desc, form, "" };
+			memcpy(join.name, sName.c_str(), sName.size());
 			memcpy(buf, &join, sizeof(join));
+			seqNm++;
 		}
 
 
 
+	
 	};
 
 

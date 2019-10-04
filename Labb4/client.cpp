@@ -9,14 +9,9 @@
 
 int main()
 {
-	spark::MsgHead head = { sizeof(spark::JoinMsg), 1, 1, spark::MsgType::JOIN };
-	spark::JoinMsg join = { head, spark::ObjectDesc::HUMAN, spark::ObjectForm::CONE, "sparky" };
-
-	char mData[sizeof(join)];
-	memcpy(mData, &join, sizeof(join));
-
-	char mmData[sizeof(spark::JoinMsg)];
-	spark::Msg::Join("Sparky", 1, spark::ObjectDesc::HUMAN, spark::ObjectForm::CONE, mmData);
+	unsigned int seqNm = 0;
+	char mData[sizeof(spark::JoinMsg)];
+	spark::Msg::Join("Sparky", 1, spark::ObjectDesc::HUMAN, spark::ObjectForm::CONE, mData, seqNm);
 	
 
 	WSADATA wsa;
